@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>instanceof</title>
+</head>
+<body>
+	<h1>
+		instanceof()
+		
+	</h1>
+	<h2>主要用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。</h2>
+	
+</body>
+<script>
+	// 定义自己的myInstanceof
+	//  
+	// 
+	function person(){
+		name="xxk"
+		b=function(){
+			console.log(12)
+		}
+	}
+	let a = new person()
+	function myInstanceOf(obj,class_name){
+
+		let pointer = obj
+		// 当寻找最顶层 null 跳出循环
+		// 原型链最顶层皆为 null
+		while (pointer){
+				// 判断传入对象（obj）与对比 实列（name）原型是否一致
+				if(pointer === class_name.prototype){
+					return true;
+				}
+				// 不一致则通过原型链 去上一层继续寻找
+			pointer = pointer.__proto__
+		}
+		return false;
+	}
+	console.log("is: " + myInstanceOf(a,person));
+</script>
+
+</html>

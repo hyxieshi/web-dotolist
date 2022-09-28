@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //  去重
+    let arr = [1, 2, 4, 2, '23412', 6, 3, 6, 6, {name:'hy',log(){a:'aaa'}}, 7, 1, 4, 1, 1, 12, 'asd', '23412']
+
+    // arr = arr.sort((a,b)=>a-b)
+    function a(arr) {
+        let arrs = []
+        let obj = {}
+        for (let i = 0; i < arr.length; i++) {
+            // console.log(!obj[arr[i]])
+            if (!obj[arr[i]]) {
+                obj[arr[i]] = '123456'
+                // console.log(obj[arr[i]])
+                arrs.push(arr[i])
+            }
+        }
+        // console.log(obj)
+        return arrs
+    }
+    // console.log(a(arr))
+    // 乱序
+     function b(arr) {
+        for (let i = arr.length; i; i--) {
+            let j = Math.floor(Math.random() * i);
+            [arr[i - 1], arr[j]] = [arr[j], arr[i - 1]];
+        }
+        return arr;
+    }
+    // console.log(b(arr))
+    // 扁平
+    function flat1(array) {
+        // reduce(): 对数组的每一项执行归并函数，这个归并函数的返回值会作为下一次调用时的参数，即 preValue
+        // concat(): 合并两个数组，并返回一个新数组
+        return array.reduce((preValue, curItem) => {
+            return preValue.concat(Array.isArray(curItem) ? flat1(curItem) : curItem)
+        }, [])
+    }
+    console.log(flat1(arr))
+</script>
+
+</html>

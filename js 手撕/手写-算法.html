@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    冒泡 快排 插入 选择
+</body>
+<script>
+    let a = [555, 222, 6767, 999, 111, 4433, 666, 2345, 88]
+    // pgv_pvid=1986493920;ts_uid=4737377893;region=CN;puin=3176366671;pt2gguin=o03176366671;uin=o03176366671;tgp_id=101732371;geoid=45;lcid=2052;tgp_env=online;tgp_user_type=0;colorMode=1;ssr=0;colorMode=1;pgv_info=ssid=s9936885800;language=zh_CN;tgp_biz_ticket=0100000000000000003E4FF13531F7CE389A101FA395D60AC44EEF93E0E85D7A3744CEA45AF51D2EA8FEFE9CE123D040D0AE67A8FF7FEAF879348A273841082B225645878419FB415F;pkey=00016329DCEB0070CA7F075FFE0602E3CF82376AF04118B757A583210B5D4B7105D424964F3AB5A9B97121C38FD2C501B941A9D4B85C20C2770B394F0D309132359EB549EDDD93195DFE7F508B6DE18E47796B3FD9F9733BF2BD70978FC2B0AB28ED5E8DC4AF5453D65101088B27A60ECD06F3D7D1A1F22A;tgp_ticket=1658625B6F62D0EAEE0C5391754C0EE117472A877A8109307C28501989D341F9462FEE52B38B4FD36FE7E38096AD6FB5C2A772867A75AAB94D6E99FA24CCC9C34D514576A055D6D5D1898FCF068949224BBB66A13318F7A7A8147756C62637FAE672E416E6246EB8837B8F94546797F2B2593A2E21BFE12E2C25D87DAEB3B471;ts_last=www.wegame.com.cn/helper/lol/search/index.html
+
+    // 2 4 1 3
+    // 4 2 1 3
+    // 4 2 3 1
+    // 冒泡
+    // 利用相邻两个值行进比对
+    // i 比 i+1 大 则替换位置
+
+    function maopao(arr) {
+        let x
+        for (let i = 0; i < a.length - 1; i++) {
+            for (let y = 0; y < a.length - 1 - i; y++) {
+                if (arr[y] > arr[y + 1]) {
+                    x = arr[y + 1]
+                    arr[y + 1] = arr[y]
+                    arr[y] = x
+                }
+            }
+        }
+        return arr
+    }
+    // console.log(maopao(a))
+    // 快排
+    // 先选取一个基准值
+    // 利用基准值 对数组 进行大于小于 替换
+    // 拼接
+    function quick(arr) {
+        if(arr.length<2) return arr
+        let a = arr[0]
+        let mixa = arr.slice(1).filter(i => i <= a)
+        let maxa = arr.slice(1).filter(i => i > a)
+        return quick(mixa).concat([a]).concat(quick(maxa))
+    }
+    // console.log(quick(a))
+
+    // 插入
+    function myinsert(arr){
+        let preIndex ,current
+        for (var i = 1; i < arr.length; i++) {
+        preIndex = i - 1;
+        current = arr[i];
+        while(preIndex >= 0 && arr[preIndex] > current) {
+            arr[preIndex+1] = arr[preIndex];
+            preIndex--;
+        }
+        arr[preIndex+1] = current;
+    }
+        return arr
+    }
+    // console.time('myinsert')
+    // console.log(myinsert(a))
+    // console.timeEnd('myinsert')
+    // 选择
+    function selectionSort(arr){
+        let min ,temp
+        for (let i = 0; i < arr.length-1; i++) {
+            min=i
+            for (let j = 0; j < arr.length; j++) {
+                if(arr[j]<arr[min]) min = j
+            }
+            temp = arr[i]
+            arr[i] = arr[min]
+            arr[min] = temp
+        }
+        return arr
+    }
+    console.time('myinsert')
+    console.log(selectionSort(a))
+    console.timeEnd('myinsert')
+</script>
+
+</html>

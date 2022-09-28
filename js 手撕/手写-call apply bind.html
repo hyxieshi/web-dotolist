@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写-call apply bind</title>
+</head>
+
+<body>
+    <h1>手写-call apply bind</h1>
+    <p>皆可改变 函数内的this 指向 </p>
+    <p>1.call apply 立即执行 bind 返回是个函数 不会立即执行</p>
+    <p>参数不同 apply 第二个参数是个数组 call bind 可以拥有多个参数</p>
+    <h2>call</h2>
+    <p>1.接受参数</p>
+    <p>2.this指向性</p>
+    <p>3.返回值</p>
+    <h2>apply</h2>
+    <h2>bind</h2>
+</body>
+<script>
+    function person() {
+        console.log(this.name)
+        console.log(this.age)
+        console.log('this', this)
+        
+    }
+    let xike = {
+        name: 'xike',
+        age: 21,
+        
+    }
+    // call  第一个参数是改变this指向 第二个是个数组传参
+    
+    Function.prototype.myCall = function (obj, ...args) {
+            obj.fn = this
+            obj.fn(args)
+            // console.log(args)
+            delete obj.fn
+            return args
+    }
+    // let a = person.myCall(xike, 'xk', 2, 3, 'sd')
+    // console.log(a)
+    // person.call(xike ,'hy',2,3,'sd')
+
+
+    Function.prototype.myApply= function(obj ,arr){
+        obj.fn = this
+        obj.fn(arr)
+        console.log(obj.fn)
+        delete obj.fn
+        return arr
+    }
+    let b 
+    b = person.myApply(xike,[1,2,3,45,21])
+    //  b = person.apply(xike,[1,2,3,45,21])
+    console.log(b)
+    document.getElementById
+</script>
+
+</html>

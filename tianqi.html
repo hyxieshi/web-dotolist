@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>tianqi</title>
+</head>
+<style>
+	* {
+	  margin: 0;
+	  padding: 0;
+	  justify-content: center;
+	  align-items: center;
+	  box-sizing: border-box;
+	  font-family: "Poppins", sans-serif;
+	}
+	
+	::-webkit-scrollbar {
+	  display: none;
+	}
+	
+	body {
+	  position: relative;
+	  height: 100%;
+	}
+	
+	#loading {
+	  position: fixed;
+	  width: 100%;
+	  height: 100vh;
+	  background: #fff url("/loading.svg") no-repeat center;
+	  z-index: 99999;
+	}
+	
+	.cont {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  box-sizing: border-box;
+	}
+	
+	.one {
+	  margin-top: 1.5em;
+	  padding: 15px;
+	  display: inline-block;
+	  font-size: 20px;
+	  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.8);
+	  overflow: hidden;
+	  border-radius: 25px;
+	  border-top: 2px solid rgba(255, 255, 255, 0.5);
+	  border-left: 2px solid rgba(255, 255, 255, 0.5);
+	  width: 30%;
+	  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+	  text-align: center;
+	  opacity: 0.9;
+	}
+	
+	@media only screen and (max-width: 768px) {
+	  .one {
+	    width: auto;
+	  }
+	}
+	
+	.two {
+	  display: flex;
+	  height: 75vh;
+	  top: 10%;
+	  justify-content: center;
+	  align-items: center;
+	  box-sizing: border-box;
+	}
+	
+	.card {
+	  position: relative;
+	  text-align: none;
+	  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.7);
+	  overflow: hidden;
+	  border-radius: 25px;
+	  background: rgba(255,252,153,0.5);
+	  border-top: 1px solid rgba(255, 255, 255, 0.5);
+	  border-left: 1px solid rgba(255, 255, 255, 0.5);
+	  color: black;
+	  padding: 2em;
+	  width: 100%;
+	  max-width: 420px;
+	  transform-style: preserve-3d;
+	  perspective: 1000px;
+	  margin: 1em;
+	  backdrop-filter: blur(5px);
+	}
+	
+	.search {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin: 0;
+	  transform: translateZ(30px);
+	}
+	
+	.icon {
+	  animation: rotates 2.5s linear infinite alternate;
+	}
+	
+	@keyframes rotates {
+	  from {
+	    transform: translate(-0.4em);
+	  }
+	  to {
+	    transform: translate(0.4em);
+	  }
+	}
+	
+	button {
+	  margin: 0.5em;
+	  border-radius: 50%;
+	  border: none;
+	  height: 46px;
+	  width: 46px;
+	  outline: none;
+	  background: black;
+	  color: white;
+	  cursor: pointer;
+	  transition: 0.2s ease-in-out;
+	}
+	
+	input.search-bar {
+	  border: none;
+	  outline: none;
+	  padding: 0.5em 1em;
+	  border-radius: 24px;
+	  background: black;
+	  color: black;
+	  font-family: inherit;
+	  font-size: 120%;
+	  width: calc(70%);
+	  background: rgba(0, 0, 0, 0.1);
+	  transform: translateZ(30px);
+	  border-top: 1px solid rgba(255, 255, 255, 0.8);
+	  border-left: 1px solid rgba(255, 255, 255, 0.8);
+	  backdrop-filter: blur(3px);
+	}
+	
+	::placeholder {
+	  color: black;
+	  opacity: 0.7;
+	}
+	button:hover {
+	  border: white 0.2em solid;
+	  transition: 0.2s ease-in-out;
+	}
+	
+	.card:after {
+	  content: "";
+	  display: block;
+	  left: 0;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 11;
+	  transform: translate3d(0, 0, 0);
+	}
+	
+	@keyframes drift {
+	  from {
+	    transform: rotate(0deg);
+	  }
+	  from {
+	    transform: rotate(360deg);
+	  }
+	}
+	
+	h2.city {
+	  margin-top: 0.5em;
+	  text-align: center;
+	  font-size: 1.5em;
+	  transform: translateZ(30px);
+	}
+	
+	h1.temp {
+	  margin: 0;
+	  font-size: 2em;
+	  align-items: center;
+	  justify-content: center;
+	  text-align: center;
+	  margin-left: 0.1em;
+	  transform: translateZ(30px);
+	}
+	
+	.description {
+	  text-transform: capitalize;
+	  margin-left: 8px;
+	}
+	
+	.flex {
+	  display: flex;
+	  justify-content: left;
+	}
+	
+	.other {
+	  font-size: 1.2em;
+	  font-weight: 500;
+	  transform: translateZ(30px);
+	}
+	
+	.weather.loading {
+	  visibility: hidden;
+	  max-height: 20px;
+	  position: relative;
+	  align-items: center;
+	}
+	
+	.weather.loading:after {
+	  visibility: visible;
+	  content: "Loading...";
+	  color: white;
+	  position: absolute;
+	  top: 0;
+	  left: 20px;
+	}
+	
+	.three{
+	  display: flex;
+	  text-align: center;
+	  align-items: flex-end;
+	  justify-content: right;
+	  box-sizing: border-box;
+	  position: relative;
+	}
+	
+	a{
+	  text-decoration-color: blueviolet ;
+	  color:black;
+	}
+	
+	.name {
+	  text-decoration: none;
+	  color: black;
+	  margin-left: auto;
+	  font-weight: 700;
+	  font-size: 1em;
+	  padding: 15px;
+	  overflow: hidden;
+	  border-radius: 15px;
+	  width: 15em;
+	  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+	  opacity: 0.9;
+	}
+</style>
+<!-- - [ ] 在字段中输入城市名称`input`。
+- [ ] 通过按下回车，用户提交城市名称，城市名称更新为`DOM`温度、天气状况、白天或夜晚的图像和天气状况图标。
+- [ ] 通过关闭浏览器窗口，城市名称将存储在 localStorage 中，当用户返回时，将检索名称以进行 api 调用以更新`DOM`. -->
+
+<body>
+	<div class="two">
+	        <div class="card">
+	            <div class="search">
+	                <input type="text" class="search-bar" placeholder="Search" id="a">
+	                <button onclick="getUrl()">
+	                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1.5em" xmlns="http://www.w3.org/2000/svg">
+	                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"></path>
+	                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"></path>
+	                    </svg>
+	                </button>
+	            </div>
+	            <div class="weather">
+	                <h2 class="city" id="city"></h2>
+	                <h1 class="temp" id="temp"></h1>
+	                <div class="other">
+	                    <div class="humidity" id="humidity"></div>
+	                    <div class="wind" id="wind"></div>
+	                </div>
+	            </div>
+	        <div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); width: 840px; height: 840px; transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0;"></div></div></div>
+	    </div>
+</body>
+<script>
+	// https://restapi.amap.com/v3/weather/weatherInfo?city=110101&key=<用户key>
+	const key = 'fdcba7f3492542368b1aedcfe0c0c013'
+	const url = 'https://jisutqybmf.market.alicloudapi.com/weather/query'
+	const localStorage =window.localStorage
+	// let search = document.getElementById("search");
+	let citys = document.getElementById("city");
+	let temp = document.getElementById("temp");
+	let humidity = document.getElementById("humidity");
+	let wind = document.getElementById("wind");
+	let city =''
+	let strs = ''
+	// search.onblur = function(){
+	// 	let str = document.getElementById("search").value;
+	// 	getUrl(str)
+	// }
+	
+	let getUrl =(str)=>{
+		if(str){
+			fetch(`${url}?city=${str}`,{
+				method:'Get',
+				headers:{
+					'Authorization':`appcode ${key}`
+				}
+			}).then(res =>res.json())
+			  .then(data=>{
+				  strs = data.result
+				  upDate(strs)
+			  }) 
+		}else{
+			let str = document.getElementById("a").value;
+			fetch(`${url}?city=${str}`,{
+				method:'Get',
+				headers:{
+					'Authorization':`appcode ${key}`
+				}
+			}).then(res =>res.json())
+			  .then(data=>{
+				  strs = data.result
+				  upDate(strs)
+			  }) 
+		}
+		
+		// console.log(str)
+		
+	}
+	let upDate=(q)=>{
+		// console.log(q)
+		city = q.city
+		citys.innerText=`Weather in ${q.city}`
+		temp.innerText=`${q.temp} °C`
+		humidity.innerText=`湿度: ${q.humidity}`
+		wind.innerText=`风速: ${q.windpower}`
+	}
+	window.onbeforeunload = function(){
+		if(city!==''){
+			localStorage.city=city;
+			
+		}
+	}
+	window.onload = function(){
+		if(localStorage.city){
+			getUrl(localStorage.city)
+		}
+	}
+</script>
+</html>

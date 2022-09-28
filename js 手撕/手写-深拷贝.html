@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>深拷贝</h1>
+    <ul>
+        <li>先判断 是否为object （数组 对象）</li>
+        <li>利用递归进行赋值</li>
+        <li></li>
+    </ul>
+</body>
+<script>
+    let a ={
+        name:'xike',
+        num:[180,731,16160],
+        friend:{
+            name:'pmj'
+        }
+    }
+    // 深拷贝
+    // 先判断这个是不是一个数组或者对象 不是直接返回
+    // 利用typeof  皆为object
+    function deepClone(obj={}){
+        if(obj==null||typeof obj !=='object'){
+            return obj;
+        }
+        let result
+        if(obj instanceof Array){
+            result = []
+        }else{
+            result = {}
+        }
+        for(let key in obj){
+            result[key] = deepClone(obj[key])
+        }
+        console.log('obj:' +result)
+        return result
+    }
+    // let b = deepClone(a)
+
+
+
+function clone(obj){
+    let result
+    if (typeof obj !=="object") return obj
+    obj instanceof Array ? result=[]:result={}
+    for(let i in obj){
+        result[i] =clone(obj[i]) 
+    } 
+    return result
+}
+    let b = clone(a)
+
+    b.friend.name='ylp'
+    console.log(a)
+    console.log(b)
+</script>
+</html>
