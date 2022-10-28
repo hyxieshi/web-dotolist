@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-25 17:29:56
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-29 00:54:04
+ * @LastEditTime: 2022-10-29 01:12:14
  * @FilePath: \js方法重写.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -89,8 +89,8 @@ function myFilter(callback) {
 
 // 如果 start 是个负数, 则开始索引会被自动计算成为 length+start, 其中 length 是 this 对象的 length 属性值。如果 end 是个负数, 则结束索引会被自动计算成为 length+end。
 function myFill(value, start = 0, end = this.length) {
-  start = start < 0 ? this.leng + start : start;
-  end = end < 0 ? this.leng + end : end;
+  start = start < 0 ? this.length + start : start;
+  end = end < 0 ? this.length + end : end;
   for (let i = start; i < end; i++) {
     this[i] = value;
   }
