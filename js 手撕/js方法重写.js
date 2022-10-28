@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-25 17:29:56
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-29 01:12:14
+ * @LastEditTime: 2022-10-29 01:59:30
  * @FilePath: \js方法重写.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -98,9 +98,38 @@ function myFill(value, start = 0, end = this.length) {
 }
 
 // includes
-
+function myIncludes(value, index = 0) {
+  index = index < 0 ? (index = this.length + index) : index;
+  for (let i = index; i < this.length; i++) {
+    if (this[i] === value) return true;
+  }
+  return false;
+}
 // push
+function myPush(...value) {
+  for (let i = 0; i < value.length; i++) {
+    this[this.length] = value[i];
+  }
+  return this.length;
+}
 
 // slice
+// 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
+function mySlice(begin = 0, end = this.length) {
+  let a = [];
+  begin = begin < 0 ? this.length + begin : begin;
+  end = end < 0 ? this.length + end : end;
+  for (let i = begin; i < end; i++) {
+    a.push(this[i]);
+  }
+  return a;
+}
 
 // unshift
+//  方法将一个或多个元素添加到数组的开头，并返回该数组的新长度(该方法修改原有数组)。
+
+function myUnshift(...value) {
+  this.reverse().push(...value.reverse());
+  this.reverse();
+  return this.length;
+}
