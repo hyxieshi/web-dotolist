@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .com {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .flexs {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+  <body>
+    <div class="com">
+      <div class="flexs"></div>
+    </div>
+    <script>
+      const a = new Promise((res, rej) => {
+        console.log(1);
+        setTimeout(() => {
+          console.log(2);
+          res();
+          console.log(3);
+        });
+      });
+      a.then(() => {
+        console.log(4);
+      });
+      console.log(5);
+
+      const b = new Promise((res, rej) => {
+        setTimeout(() => {
+          res();
+        }, 1000);
+      });
+      const c = b.catch(() => {
+        return 2;
+      });
+
+      console.log("b", b);
+      console.log("a", a);
+
+      setTimeout(() => {
+        console.log("b", b);
+        console.log("a", a);
+      }, 2000);
+
+      async function m() {
+        console.log(0);
+        const n = await 1;
+        // new Promise((res,rej)=>{
+        //   res(1)
+        // })
+        console.log(n);
+      }
+      m();
+      console.log(2);
+
+      async function m() {
+        console.log(0);
+        const n = await 1;
+        console.log(n);
+      }
+      (async () => {
+        await m();
+        console, log(2);
+      })();
+      console.log(3);
+
+      const arr = [1, 2, [3, 4, [5]]];
+      Array.prototype.flat = function () {};
+      const res = arr.flat(); //[ 1, 2, 3, 4, 5 ]
+      function myflat(arr) {
+        let a = [];
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] instanceof Array) {
+            let b = myflat(arr[i]);
+            a = a.concat(b);
+          } else {
+            a.push(arr[i]);
+          }
+        }
+        return a;
+      }
+
+      async function m1() {
+        return 1;
+      }
+      async function m2() {
+        const n = await m1();
+        console.log(n);
+        return 2;
+      }
+      async function m3() {
+        const n = m2();
+        console.log(n);
+        return 3;
+      }
+
+      m3().then((n) => {
+        console.log(4);
+      });
+
+      m3();
+
+      console.log(4);
+
+      Promise.resolve(1).then(2).then(Promise.resolve(3)).then(console.log);
+
+      var i = 10;
+      function a() {
+        var i = 20;
+        var k = 30;
+        function b() {
+          var x = 30;
+          var y = 40;
+          function c() {
+            console.log(i, j, k, x);
+          }
+          c();
+        }
+        b();
+      }
+      a();
+      console.log(k);
+    </script>
+  </body>
+
+  <!-- 
+ 执行
+    pro1
+    und 
+    end
+
+ 宏 settimeout 
+ 微
+
+
+   -->
+</html>
