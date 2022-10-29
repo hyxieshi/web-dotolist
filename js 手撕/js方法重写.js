@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-25 17:29:56
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-29 01:59:30
+ * @LastEditTime: 2022-10-29 12:16:27
  * @FilePath: \js方法重写.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -82,6 +82,7 @@ function myFilter(callback) {
   return a;
 }
 // reduce
+// 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值。
 
 // fill
 // 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。
@@ -133,3 +134,29 @@ function myUnshift(...value) {
   this.reverse();
   return this.length;
 }
+
+// getLevel
+
+// copy
+
+// get
+
+// set，map
+
+// 实现填充字符串
+
+// Object.assign
+
+// Object.is
+
+// Object.create()
+
+// JSON.stringify
+
+// JSON.parse
+
+// call apply bind
+
+// repeat
+
+// new
