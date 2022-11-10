@@ -1,34 +1,44 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2022-09-26 21:22:27
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-11-11 00:03:58
+ * @FilePath: \登录.html
+ * @Description: 
+ * Copyright 2022 OBKoro1, All Rights Reserved. 
+ * 2022-09-26 21:22:27
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div>
-        <div>
-            用户名:<input type="text" class="name">
-            密码：<input type="password" class="pws">
-        </div>
-        <button class="btn" onclick="dainji()">登录</button>
+      <div>
+        用户名:<input type="text" class="name" /> 密码：<input
+          type="password"
+          class="pws"
+        />
+      </div>
+      <button class="btn" onclick="dainji()">登录</button>
     </div>
-</body>
-<script>
-    
-    function dainji(){
-        let  name = document.getElementsByClassName('name')[0].value;
-        let  pws = document.getElementsByClassName('pws')[0].value;
-        console.log(name,pws)
-        if(name && pws){
-            if(localStorage.getItem(`${name}`)){
-                if(pws === localStorage.getItem(`${name}`)) console.log('a')
-                else return false
-            }else{
-                localStorage.setItem(`${name}`,`${pws}`)
-            }
-        }else console.log("e")
+  </body>
+  <script>
+    function dainji() {
+      let name = document.getElementsByClassName("name")[0].value;
+      let pws = document.getElementsByClassName("pws")[0].value;
+      if (name && pws) {
+        if (localStorage.getItem(`${name}`)) {
+          if (pws === localStorage.getItem(`${name}`)) console.log("a");
+          else return false;
+        } else {
+          localStorage.setItem(`${name}`, `${pws}`);
+        }
+      } else console.log("e");
     }
-</script>
+  </script>
 </html>
