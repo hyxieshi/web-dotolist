@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-25 17:29:56
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-29 12:16:27
+ * @LastEditTime: 2023-01-07 14:55:44
  * @FilePath: \js方法重写.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -142,7 +142,21 @@ function myUnshift(...value) {
 // get
 
 // set，map
-
+//map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。
+const hhh = [1, 2, 3, 4, 5, 6];
+Array.prototype.myMap = function (callback) {
+  let arr1 = [];
+  // console.log(this);
+  for (const [index, value] of this.entries()) {
+    arr1.push(callback(value, index, this));
+  }
+  return arr1;
+};
+console.log(
+  hhh.myMap((ele, i, arr) => {
+    return ele * 2;
+  })
+);
 // 实现填充字符串
 
 // Object.assign
