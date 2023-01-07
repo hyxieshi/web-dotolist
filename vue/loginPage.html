@@ -1,0 +1,128 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-01-06 10:56:57
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-01-06 11:33:42
+ * @FilePath: d:\xike\Desktop\web-dotolist\vue\loginPage.html
+ * @Description: =-=
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-01-06 10:56:57
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loginPage</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="userName" placeholder="用户名-admin" />
+      <input
+        type="password"
+        v-model="password"
+        placeholder="密码-admin"
+        @input="changemag"
+      />
+      <button @click="signIn">登录</button>
+      <p v-show="information">{{information}}</p>
+    </div>
+  </body>
+  <script type="module">
+    import { createApp } from "https://cdn.bootcdn.net/ajax/libs/vue/3.2.45/vue.esm-browser.min.js";
+    let a = 0;
+    createApp({
+      data() {
+        return {
+          userName: "",
+          password: "",
+          pass: "",
+          information: "",
+        };
+      },
+      created() {
+        // 加载时看受否有记录
+        if (!localStorage.getItem("userInfor")) {
+          return;
+        }
+        let { userName, password } = JSON.parse(
+          localStorage.getItem("userInfor")
+        );
+        // pass 临时存储密码
+        this.userName = userName;
+        this.pass = password;
+        // 假密码
+        this.password = "******";
+        // 标签 表示这个数据是从loca取出来的
+        a = 1;
+      },
+      methods: {
+        async signIn() {
+          // 看loac获取密码后是否修改
+          if (a === 1) {
+            this.password = this.pass;
+          }
+          //   看是否都输入
+          if (!this.userName || !this.password) {
+            console.log("err");
+            return;
+          }
+          //   登录成功
+          if (this.userName === "admin" && this.password === "admin") {
+            console.log("signIn");
+            // 存储密码
+            localStorage.setItem(
+              "userInfor",
+              JSON.stringify({
+                userName: this.userName,
+                password: this.password,
+              })
+            );
+            this.information = "登录成功";
+            await this.delay(1000);
+            return;
+          }
+          //   失败
+          this.information = "登录失败";
+          await this.delay(1000);
+          return;
+        },
+        // 密码被修改时触发
+        changemag() {
+          //   标签
+          a = 0;
+        },
+        delay(time) {
+          return new Promise(() => {
+            setTimeout(() => {
+              this.information = "";
+            }, time);
+          });
+        },
+      },
+    }).mount("#app");
+  </script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #app {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      height: 300px;
+    }
+    input {
+      margin: 10px;
+    }
+  </style>
+</html>

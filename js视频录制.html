@@ -1,0 +1,94 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2022-12-17 23:12:11
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-12-17 23:27:09
+ * @FilePath: d:\xike\Desktop\web-dotolist\js视频录制.html
+ * @Description: 
+ * Copyright 2022 OBKoro1, All Rights Reserved. 
+ * 2022-12-17 23:12:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js视频录制</title>
+    <!-- <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script> -->
+  </head>
+  <body>
+    <video id="video"></video>
+    <button id="start">开始</button>
+    <button id="stop">暂停</button>
+    <button id="download">下载</button>
+  </body>
+  <script>
+    const displayMediaOptions = {
+      video: {
+        cursor: "never",
+      },
+      audio: true,
+    };
+    document.getElementById("start").addEventListener("click", async (e) => {
+      log = "";
+      try {
+        captureStream = await navigator.mediaDevices.getDisplayMedia(
+          displayMediaOptions
+        );
+      } catch (err) {
+        console.log("Error: " + err);
+        return alert("capture is error or cancel!");
+      }
+      // 删除原来的blob
+      window.URL.revokeObjectURL(video.src);
+      video.srcObject = captureStream;
+      recorder = new MediaRecorder(captureStream);
+      recorder.start();
+    });
+    document.getElementById("stop").addEventListener("click", async (e) => {
+      let tracks = video.srcObject.getTracks();
+      tracks.forEach((track) => {
+        track.stop();
+      });
+      recorder.stop();
+      recorder.addEventListener("dataavailable", (event) => {
+        let videoUrl = URL.createObjectURL(event.data, { type: "video/mp4" });
+        video.srcObject = null;
+        video.src = videoUrl;
+      });
+    });
+    document.getElementById("download").addEventListener("click", async (e) => {
+      const name = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ")
+        .replace(" ", "_")
+        .replace(/:/g, "-");
+      const a = document.createElement("a");
+      a.href = video.src;
+      a.download = `${name}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+    });
+    // const app = ()=>{
+    //     const [audioUrl,setAudioUrl] = useState('')
+    //     const starRecord = async ()=>{
+
+    //     }
+    //     const stopRecord = async ()=>{
+
+    //     }
+    //     return {
+    //         <div> </div>
+    //     }
+    // }
+  </script>
+</html>
