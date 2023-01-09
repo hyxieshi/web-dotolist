@@ -2,8 +2,8 @@
  * @Author: SunBOY
  * @Date: 2023-01-06 10:56:57
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-06 11:33:42
- * @FilePath: d:\xike\Desktop\web-dotolist\vue\loginPage.html
+ * @LastEditTime: 2023-01-09 14:02:37
+ * @FilePath: \web-dotolist\vue\loginPage.html
  * @Description: =-=
  * Copyright 2023 OBKoro1, All Rights Reserved. 
  * 2023-01-06 10:56:57
@@ -94,9 +94,10 @@
           a = 0;
         },
         delay(time) {
-          return new Promise(() => {
+          return new Promise((res) => {
             setTimeout(() => {
               this.information = "";
+              res();
             }, time);
           });
         },
