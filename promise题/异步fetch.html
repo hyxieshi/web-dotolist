@@ -1,0 +1,38 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-01-13 16:49:00
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-01-13 17:59:21
+ * @FilePath: \web-dotolist\promise题\异步fetch.html
+ * @Description: 
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-01-13 16:49:00
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const url = "http://jsonplaceholder.typicode.com/posts";
+
+      async function dataRequest() {
+        const data = await fetch(url);
+        console.log((await data.json()) + "awite");
+      }
+      dataRequest();
+
+      fetch(url)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data, "成功");
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-01-13 15:33:05
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-01-13 16:12:58
+ * @FilePath: \web-dotolist\js 手撕\Myset.html
+ * @Description:  
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-01-13 15:33:05
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myset</title>
+  </head>
+  <body>
+    <script>
+      class Myset {
+        constructor(arr = []) {
+          // 需要判断是否为可迭代对象
+          if (typeof arr[Symbol.iterator] !== "function") {
+            throw new TypeError("不是可迭代对象");
+          }
+          this._datas = [];
+          for (const item of arr) {
+            this.add(item);
+          }
+        }
+        // 添加
+        add(item) {
+          if (!this.has(item)) {
+            this._datas.push(item);
+          }
+        }
+        // 清空
+        clear() {
+          this._datas.length = 0;
+        }
+        // 删除
+        delete(data) {
+          for (let i = 0; i < this._datas.length; i++) {
+            const item = this._datas[i];
+            if (this.isEqual(data, item)) {
+              this._datas.splice(i, 1);
+              return true;
+            }
+            return false;
+          }
+        }
+        // 循环
+        forEach(callback) {
+          for (const item of this._datas) {
+            callback(item, item, this);
+          }
+        }
+        // 是否在集合里面
+        has(data) {
+          for (const item of this._datas) {
+            if (this.isEqual(data, item)) {
+              return true;
+            }
+          }
+          return false;
+        }
+        // 多少
+        get size() {
+          return this._datas.length;
+        }
+        // 判断值是否相等
+        isEqual(x, y) {
+          if (x === 0 && y === 0) {
+            return true;
+          }
+          return Object.is(x, y);
+        }
+        //遍历
+        *[Symbol.iterator]() {
+          for (const item of this._datas) {
+            yield item;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

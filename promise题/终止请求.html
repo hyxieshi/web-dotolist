@@ -1,0 +1,62 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-01-13 18:11:16
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-01-13 19:18:21
+ * @FilePath: \web-dotolist\promise题\终止请求.html
+ * @Description: 
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-01-13 18:11:16
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   const con = new AbortController();
+      //   setTimeout(() => {
+      //     con.abort();
+      //     console.log("zz");
+      //   }, 5000);
+      //   fetch("http://jsonplaceholder.typicode.com/posts", {
+      //     signal: con.signal,
+      //   }).then((res) => {
+      //     console.log("cg");
+      //   });
+      function delay(i) {
+        return new Promise((res) => {
+          setTimeout(() => {
+            console.log(i);
+            res();
+          }, 1000);
+        });
+      }
+      async function tim() {
+        for (let i = 1; i < 6; i++) {
+          await delay(i);
+        }
+      }
+      //   tim();
+
+      function sleep(time) {
+        return new Promise((res) => {
+          setTimeout(() => {
+            console.log(`我等待了${time}秒才出现你面前`);
+            res();
+          }, time * 1000);
+        });
+      }
+      async function runCode(time) {
+        console.log(" 我在sleep 之前");
+        await sleep(time);
+        console.log(" 我在sleep 之后");
+      }
+      runCode(6);
+    </script>
+  </body>
+</html>

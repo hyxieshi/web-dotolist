@@ -1,0 +1,54 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-01-13 16:17:52
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-01-13 17:02:25
+ * @FilePath: \web-dotolist\promise题\交通灯交替.html
+ * @Description: 
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-01-13 16:17:52
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function red() {
+        console.log("red");
+      }
+      function yellow() {
+        console.log("yellow");
+      }
+      function green() {
+        console.log("green");
+      }
+      function implement(time, colour) {
+        // console.log(typeof colour);
+        return new Promise((res) => {
+          setTimeout(() => {
+            if (colour === "red") {
+              red();
+            } else if (colour === "yellow") {
+              yellow();
+            } else if (colour === "green") {
+              green();
+            }
+            res();
+          }, time);
+        });
+      }
+      async function runCode() {
+        await implement(3000, "red");
+        await implement(3000, "yellow");
+        await implement(3000, "green");
+        runCode();
+      }
+      runCode();
+    </script>
+  </body>
+</html>
