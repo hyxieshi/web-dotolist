@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2023-01-13 18:11:16
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-13 19:18:21
+ * @LastEditTime: 2023-01-13 23:03:08
  * @FilePath: \web-dotolist\promise题\终止请求.html
  * @Description: 
  * Copyright 2023 OBKoro1, All Rights Reserved. 
@@ -28,35 +28,83 @@
       //   }).then((res) => {
       //     console.log("cg");
       //   });
-      function delay(i) {
-        return new Promise((res) => {
-          setTimeout(() => {
-            console.log(i);
-            res();
-          }, 1000);
-        });
-      }
-      async function tim() {
-        for (let i = 1; i < 6; i++) {
-          await delay(i);
-        }
-      }
-      //   tim();
+      //   function delay(i) {
+      //     return new Promise((res) => {
+      //       setTimeout(() => {
+      //         console.log(i);
+      //         res();
+      //       }, 1000);
+      //     });
+      //   }
+      //   async function tim() {
+      //     for (let i = 1; i < 6; i++) {
+      //       await delay(i);
+      //     }
+      //   }
+      //   //   tim();
 
-      function sleep(time) {
-        return new Promise((res) => {
-          setTimeout(() => {
-            console.log(`我等待了${time}秒才出现你面前`);
-            res();
-          }, time * 1000);
+      //   function sleep(time) {
+      //     return new Promise((res) => {
+      //       setTimeout(() => {
+      //         console.log(`我等待了${time}秒才出现你面前`);
+      //         res();
+      //       }, time * 1000);
+      //     });
+      //   }
+      //   async function runCode(time) {
+      //     console.log(" 我在sleep 之前");
+      //     await sleep(time);
+      //     console.log(" 我在sleep 之后");
+      //   }
+      //   runCode(6);
+
+      //   function interval(callback, time) {
+      //     let inter = () => {
+      //       setTimeout(() => {
+      //         callback();
+      //         inter();
+      //       }, time);
+      //     };
+      //     inter();
+      //   }
+      //   //   function output() {
+
+      //   //   }
+      //   interval(() => {
+      //     console.log(`每隔1秒输出`);
+      //   }, 1000);
+
+      let url = "http://jsonplaceholder.typicode.com/posts";
+      //   let xhr = new XMLHttpRequest();
+      //   xhr.open("get", url);
+      //   xhr.send();
+      //   xhr.onload = () => {
+      //     console.log(xhr.status, xhr.responseText);
+      //   };
+
+      function requestData(url, method, ...args) {
+        return new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open(method, url);
+          xhr.send();
+          xhr.onload = () => {
+            console.log(xhr);
+            if (xhr.status !== 200) {
+              console.log(11111);
+              rej(new Error(`响应码${xhr.status}`));
+            } else {
+              res(xhr.response);
+            }
+          };
         });
       }
-      async function runCode(time) {
-        console.log(" 我在sleep 之前");
-        await sleep(time);
-        console.log(" 我在sleep 之后");
-      }
-      runCode(6);
+      requestData(url, "get")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     </script>
   </body>
 </html>
