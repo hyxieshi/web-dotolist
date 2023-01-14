@@ -233,4 +233,36 @@ v-model语法糖 是：value @input 组成的
 
   
 
- 
+ ### v3 设计目标 及优化？
+
+- 优化
+  - 开发体验：新增租金啊 teleport 传送门，。fragments suspense composition api 等语法糖
+  - 易扩展：reactivity 模块
+  - 维护性：对ts 的支持 及组合式api 更易编写搞服用的逻辑
+  - 性能：响应式底层的api 该笔那（proxy），编译时期的优化（静态标识，事件缓存，静态提升）
+- 目标
+  - 替代v2
+
+### 了解哪些vue性能优化方法
+
+- 路由懒加载 异步加载组件 有效减少应用的尺寸
+
+  - ``````javascript
+    const router = createTouter({
+        routes:[
+            {path:'/a',component:()=>import('/a.vue')}
+        ]
+    })
+
+- keep-alive 缓存页面：避免重复创建实例，并且能保留状态
+
+- 避免v-for v-if 一起写
+- 对于不在变化的数据可以使用 v-once 或者冻结
+- 虚拟列表
+- 图片懒加载 v-lazy
+- 第三方组件库按需加载
+
+### 为什么v2里面 只能有一个根节点
+
+- 因为vdom 是一个单根树型结构，‘patch’方法在遍历的时候需要冲根节点开始遍历
+- v3中之所以可以写多个根节点，死因为引入了 ‘fragment’这个概念，如果发现组件时多根的，就创建一个fragment节点 其他的多根作为它的children。
