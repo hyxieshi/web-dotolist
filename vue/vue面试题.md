@@ -266,3 +266,18 @@ v-model语法糖 是：value @input 组成的
 
 - 因为vdom 是一个单根树型结构，‘patch’方法在遍历的时候需要冲根节点开始遍历
 - v3中之所以可以写多个根节点，死因为引入了 ‘fragment’这个概念，如果发现组件时多根的，就创建一个fragment节点 其他的多根作为它的children。
+
+### vuex 使用情况
+
+- module，项目规模变大后，单独的store对象 太过于臃肿，通过模块方式便于维护
+- 通过createStore({modules:{....}})  注册
+- 使用 store.state.xxx.yyy
+- 缺点 操作繁琐，易出错。pinia优化
+
+###  为何需要使用路由懒加载
+
+- [路由懒加载优化](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html#%E4%BD%BF%E7%94%A8-webpack)
+
+### v3 中ref 和 reactive 异同
+
+- 

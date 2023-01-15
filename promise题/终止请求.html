@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2023-01-13 18:11:16
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-14 20:55:33
+ * @LastEditTime: 2023-01-14 22:16:11
  * @FilePath: \web-dotolist\promise题\终止请求.html
  * @Description: 
  * Copyright 2023 OBKoro1, All Rights Reserved. 
@@ -183,13 +183,13 @@
           }, time * 1000);
         });
       }
-      Promise.race([delay(1), requestData(url, "get")])
-        .then((res) => {
-          console.log("cg", res);
-        })
-        .catch((err) => {
-          console.log("sb", err);
-        });
+      // Promise.race([delay(1), requestData(url, "get")])
+      //   .then((res) => {
+      //     console.log("cg", res);
+      //   })
+      //   .catch((err) => {
+      //     console.log("sb", err);
+      //   });
 
       // 根据promise a+ 规范来说
       // then()接受两个参数 如果参数是不是函数将被忽略
@@ -228,6 +228,15 @@
             res([]);
           }
         });
+      };
+
+      const data = {
+        name: "xk",
+        age: "22",
+        obj: {
+          arr: [1, 2, 3, 4],
+          num: 09230,
+        },
       };
     </script>
   </body>
