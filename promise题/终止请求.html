@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2023-01-13 18:11:16
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-14 22:16:11
+ * @LastEditTime: 2023-01-16 12:21:01
  * @FilePath: \web-dotolist\promise题\终止请求.html
  * @Description: 
  * Copyright 2023 OBKoro1, All Rights Reserved. 
@@ -82,6 +82,9 @@
       //     console.log(xhr.status, xhr.responseText);
       //   };
 
+      /**
+       * 请求数据
+       */
       function requestData(url, method, ...args) {
         return new Promise((res, rej) => {
           const xhr = new XMLHttpRequest();
@@ -98,13 +101,13 @@
           };
         });
       }
-      //   //   requestData(url, "get")
-      //   //     .then((res) => {
-      //   //       console.log(res);
-      //   //     })
-      //   //     .catch((err) => {
-      //   //       console.log(err);
-      //   //     });
+      //   requestData(url, "get")
+      //     .then((res) => {
+      //       console.log(res);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //     });
 
       //   function data1() {
       //     return new Promise((res) => {

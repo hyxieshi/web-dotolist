@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2023-01-13 16:17:52
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-13 17:02:25
+ * @LastEditTime: 2023-01-16 18:50:53
  * @FilePath: \web-dotolist\promise题\交通灯交替.html
  * @Description: 
  * Copyright 2023 OBKoro1, All Rights Reserved. 
@@ -17,6 +17,8 @@
     <title>Document</title>
   </head>
   <body>
+    <!--  -->
+    <!--
     <script>
       function red() {
         console.log("red");
@@ -49,6 +51,19 @@
         runCode();
       }
       runCode();
+    </script>-->
+    <script>
+      /**
+       *
+       */
+      function antiShak(fn, time) {
+        return () => {
+          clearTimeout(this.a);
+          this.a = setTimeout(() => {
+            fn();
+          }, time);
+        };
+      }
     </script>
   </body>
 </html>

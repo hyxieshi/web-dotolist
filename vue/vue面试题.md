@@ -281,3 +281,11 @@ v-model语法糖 是：value @input 组成的
 ### v3 中ref 和 reactive 异同
 
 - 
+
+
+
+### watcheffect watch 异同
+
+watcheffect  立刻运行一个函数，然后被动跟踪它的依赖
+
+watch 侦测一个或多个响应式数据 在数据发生变化时调用一个回调函数
