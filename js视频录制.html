@@ -2,8 +2,8 @@
  * @Author: SunBOY
  * @Date: 2022-12-17 23:12:11
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-01-15 20:41:03
- * @FilePath: \web-dotolist\js视频录制.html
+ * @LastEditTime: 2023-02-14 01:56:11
+ * @FilePath: d:\xike\Desktop\web-dotolist\js视频录制.html
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
  * 2022-12-17 23:12:11
@@ -30,13 +30,12 @@
       <button id="stop">暂停</button>
       <button id="download">下载</button>
     </div>
-    <video id="video"></video>
+    <p></p>
+    <video id="video" style="width: 60%"></video>
   </body>
   <script>
     const displayMediaOptions = {
-      video: {
-        cursor: "never",
-      },
+      video: true,
       audio: true,
     };
     document.getElementById("start").addEventListener("click", async (e) => {
@@ -92,5 +91,36 @@
     //         <div> </div>
     //     }
     // }
+  </script>
+  <script>
+    let a = {
+      a: 1,
+      b: "12",
+    };
+
+    function obs(targt) {
+      let ob = {};
+      let porp = Object.keys(targt);
+      for (const item of porp) {
+        Object.defineProperty(ob, item, {
+          get() {
+            return Reflect.get(targt, item);
+          },
+          set(data) {
+            Reflect.set(targt, item, data);
+            render();
+          },
+          enumerable: true,
+        });
+      }
+      render();
+      function render() {
+        for (const item of Object.keys(ob)) {
+          document.querySelector("p").innerHTML = (`<p>a:${ob[item]}.b:${ob[item]}</p>`);
+        }
+      }
+      return ob;
+    }
+    let b = obs(a);
   </script>
 </html>

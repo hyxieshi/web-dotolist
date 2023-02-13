@@ -1,3 +1,16 @@
+/*
+ * @Author: SunBOY
+ * @Date: 2023-01-24 23:00:37
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-02-01 12:16:04
+ * @FilePath: \js-challenges.js
+ * @Description:
+ * Copyright 2023 OBKoro1, All Rights Reserved.
+ * 2023-01-24 23:00:37
+ */
+
+const res = require("./text");
+console.log(res);
 const data = [
   {
     id: "1",
@@ -62,4 +75,19 @@ function urlPars(url) {
   }
   return obj;
 }
-console.table(urlPars(url));
+// console.table(urlPars(url));
+
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+var a = 3;
+const obj2 = {
+  a: 1,
+  m1() {
+    console.log(this.a + "2222");
+  },
+  m2: () => {
+    console.log(this.a + "11111");
+  },
+};
+obj2.m1();
+obj2.m2();

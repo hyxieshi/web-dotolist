@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <button @click="hhh">
+      {{ value }}
+    </button>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      value: false,
+    };
+  },
+  methods: {
+    hhh() {
+      if (this.value) console.log("开关一开 即将关闭");
+      else console.log("打开开关");
+    },
+  },
+};
+</script>

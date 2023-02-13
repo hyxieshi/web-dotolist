@@ -1,0 +1,62 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-02-14 01:59:14
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-02-14 02:14:08
+ * @FilePath: \web-dotolist\观察者.html
+ * @Description: 
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-02-14 01:59:14
+-->
+<html>
+  <body>
+    <p></p>
+  </body>
+  <script>
+    let a = {
+      a: 1,
+      b: "12",
+    };
+
+    function obs(targt) {
+      //   es6以前观察者模式
+      //   let ob = {};
+      //   let porp = Object.keys(targt);
+      //   for (const item of porp) {
+      //     Object.defineProperty(ob, item, {
+      //       get() {
+      //         return Reflect.get(targt, item);
+      //       },
+      //       set(data) {
+      //         Reflect.set(targt, item, data);
+      //         render();
+      //       },
+      //       enumerable: true,
+      //     });
+      //   }
+
+      // es6观察着模式 使用proxy
+      let proxy = new Proxy(target, {
+        get(target, prop) {
+          return Reflect.get(target, prop);
+        },
+        set(target, prop, value) {
+          Reflect.set(target, prop, value);
+          render();
+        },
+      });
+
+      render();
+      function render() {
+        let html = "";
+        for (const item of Object.keys(targt)) {
+          html += `<p>${item}:${targt[item]}.</p>`;
+        }
+        document.querySelector("p").innerHTML = html;
+      }
+      //   return ob;
+      return proxy;
+    }
+    let b = obs(a);
+  </script>
+</html>
