@@ -2,8 +2,8 @@
  * @Author: SunBOY
  * @Date: 2023-02-15 14:40:11
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-02-15 17:13:21
- * @FilePath: \二叉搜索.js
+ * @LastEditTime: 2023-02-16 00:57:03
+ * @FilePath: \树搜索.js
  * @Description:
  * Copyright 2023 OBKoro1, All Rights Reserved.
  * 2023-02-15 14:40:11
@@ -57,7 +57,7 @@ function isByTree(root) {
     return isByTree(root.left) && isByTree(root.right);
   }
 }
-// 二叉搜索
+// 树搜索
 let nums = 0;
 function searchByTree(root, val) {
   if (root == null) return false;
