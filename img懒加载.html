@@ -1,0 +1,38 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2023-02-23 21:47:06
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2023-02-23 22:03:38
+ * @FilePath: \web-dotolist\img懒加载.html
+ * @Description: 
+ * Copyright 2023 OBKoro1, All Rights Reserved. 
+ * 2023-02-23 21:47:06
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片懒加载</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const img = new Image(500, 500);
+    img.src =
+      "https://cdn.pixabay.com/photo/2023/01/23/09/26/cat-7738210__340.jpg";
+    for (let index = 0; index < 10000; index++) {
+      img.onload = () => {
+        document.getElementById("app").appendChild(img);
+      };
+    }
+    const imgs = new IntersectionObserver();
+  </script>
+  <style>
+    img {
+      display: block;
+    }
+  </style>
+</html>

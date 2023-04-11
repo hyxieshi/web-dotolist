@@ -55,31 +55,31 @@
 // console.log(fun(100));
 // console.timeEnd('时间');
 
-function a() {
-  this.c = 123;
-  this.b = () => {
-    console.log(this);
-  };
-}
-// let hhh = new a();
+// function a() {
+//   this.c = 123;
+//   this.b = () => {
+//     console.log(this);
+//   };
+// }
+// // let hhh = new a();
 
-let b = {
-  a: 123,
-  b: {
-    x: () => {
-      console.log(this);
-    },
-    y: function () {
-      console.log(this);
-    },
-    z: function () {
-      return () => {
-        console.log(this);
-      };
-    },
-  },
-  c: function () {
-    console.log(this);
-  },
-};
-console.log(b.b.x(), b.c(), b.b.z()());
+// let b = {
+//   a: 123,
+//   b: {
+//     x: () => {
+//       console.log(this);
+//     },
+//     y: function () {
+//       console.log(this);
+//     },
+//     z: function () {
+//       return () => {
+//         console.log(this);
+//       };
+//     },
+//   },
+//   c: function () {
+//     console.log(this);
+//   },
+// };
+// console.log(b.b.x(), b.c(), b.b.z()());

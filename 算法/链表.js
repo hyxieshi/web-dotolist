@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2023-02-16 17:03:30
  * @LastEditors: SunBOY
- * @LastEditTime: 2023-02-16 17:40:21
+ * @LastEditTime: 2023-02-17 00:22:23
  * @FilePath: \链表.js
  * @Description:
  * Copyright 2023 OBKoro1, All Rights Reserved.
@@ -59,3 +59,5 @@ function deleteNode(root, value) {
 }
 // console.log(consoleNode(a));
 // console.log(consoleNode(deleteNode(a, "b")));
+
+
